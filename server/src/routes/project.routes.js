@@ -16,6 +16,7 @@ const authMiddleware = require(
 const {
   createProject,
     getUserProjects,
+    getAllProjects,
     getSingleProject,
     toggleLikeProject
 } = require("../controllers/project.controller");
@@ -26,6 +27,11 @@ router.post(
   upload.single("thumbnail"),
 
   createProject
+);
+router.get(
+  "/all",
+  authMiddleware,
+  getAllProjects
 );
 router.get(
   "/:id",

@@ -34,7 +34,7 @@ function Home() {
 
           const res =
             await api.get(
-              "/projects",
+              "/projects/all",
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
