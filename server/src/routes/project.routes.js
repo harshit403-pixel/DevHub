@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-
+im
 
 const protect = require("../middleware/auth.middleware");
 const upload = require(
@@ -19,6 +19,7 @@ const {
     getAllProjects,
     getSingleProject,
     toggleLikeProject,
+    updateProject,
     deleteProject
 } = require("../controllers/project.controller");
 
@@ -48,6 +49,12 @@ router.delete(
   "/:id",
   authMiddleware,
   deleteProject
+);
+router.put(
+  "/:id",
+  authMiddleware,
+  upload.single("thumbnail"),
+  updateProject
 );
 router.get("/", protect, getUserProjects);
 

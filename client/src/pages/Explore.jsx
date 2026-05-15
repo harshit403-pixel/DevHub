@@ -123,8 +123,7 @@ function Explore() {
           {results.users.length > 0 ? (
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {results.users.map((user) => (
-                <Link
-                  to={`/users/${user._id}`}
+                <div
                   key={user._id}
                   data-motion-card
                   data-motion-hover
@@ -161,7 +160,7 @@ function Explore() {
                       )
                     )}
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           ) : (
