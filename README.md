@@ -9,10 +9,10 @@ Built for the Mini Hackathon Sprint using the MERN stack.
 # Live Demo
 
 Frontend:
-https://your-vercel-link.vercel.app
+[https://your-vercel-link.vercel.app](https://devhub-lemon.vercel.app/)
 
 Backend:
-https://your-render-link.onrender.com
+[https://your-render-link.onrender.com](https://devhub-4p4x.onrender.com)
 
 ---
 
