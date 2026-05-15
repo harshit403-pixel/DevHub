@@ -4,11 +4,14 @@ import {
   useState,
 } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
+import { useAuth } from "../context/AuthContext";
 import api from "../api/axios";
 import usePageMotion from "../hooks/usePageMotion";
 
 function Blogs() {
+    const { user } = useAuth();
   const rootRef =
     useRef(null);
 
@@ -102,6 +105,52 @@ function Blogs() {
                 <p className="mb-8 leading-relaxed text-[#6b6258] line-clamp-4">
                   {blog.content}
                 </p>
+                {blog.author?._id ===
+  user?._id && (
+  <button
+    onClick={async (e) => {
+      e.preventDefault();
+
+      e.stopPropagation();
+
+      try {
+        const token =
+          localStorage.getItem(
+            "token"
+          );
+
+        await api.delete(
+          `/blogs/${blog._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setBlogs(
+          blogs.filter(
+            (b) =>
+              b._id !==
+              blog._id
+          )
+        );
+
+        toast.success(
+          "Blog deleted"
+        );
+      } catch (error) {
+        toast.error(
+          "Delete failed"
+        );
+      }
+    }}
+    className="mt-5 text-sm font-medium text-red-500"
+  >
+    Delete Blog
+  </button>
+)}
+
 
                 <div className="mb-8 flex flex-wrap gap-2">
                   {blog.tags.map(

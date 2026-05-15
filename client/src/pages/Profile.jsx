@@ -3,7 +3,7 @@ import {
   useRef,
   useState,
 } from "react";
-
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 import api from "../api/axios";
@@ -256,8 +256,56 @@ function Profile() {
                           Live Demo
                         </a>
                       </div>
+                      {(
+  project.createdBy?._id ||
+  project.createdBy
+) === user?._id && (
+  <button
+    onClick={async (e) => {
+      e.preventDefault();
+
+      e.stopPropagation();
+
+      try {
+        const token =
+          localStorage.getItem(
+            "token"
+          );
+
+        await api.delete(
+          `/projects/${project._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setProjects(
+          projects.filter(
+            (p) =>
+              p._id !==
+              project._id
+          )
+        );
+
+        toast.success(
+          "Project deleted"
+        );
+      } catch (error) {
+        toast.error(
+          "Delete failed"
+        );
+      }
+    }}
+    className="mt-4 text-sm font-medium text-red-500"
+  >
+    Delete Project
+  </button>
+)}
                     </div>
                   </Link>
+
                 )
               )}
             </div>

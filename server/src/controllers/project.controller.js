@@ -125,11 +125,54 @@ const getSingleProject =  async (req, res) => {
       });
     }
   };
+const deleteProject =
+  async (req, res) => {
+    try {
+      const project =
+        await Project.findById(
+          req.params.id
+        );
 
+      if (!project) {
+        return res
+          .status(404)
+          .json({
+            message:
+              "Project not found",
+          });
+      }
+
+      if (
+        project.createdBy.toString() !==
+        req.user.id
+      ) {
+        return res
+          .status(401)
+          .json({
+            message:
+              "Not authorized",
+          });
+      }
+
+      await project.deleteOne();
+
+      res.json({
+        message:
+          "Project deleted",
+      });
+    } catch (error) {
+      res.status(500).json({
+        message:
+          error.message,
+      });
+    }
+  };
 module.exports = {
   createProject,
     getAllProjects,
+
   getSingleProject,
   getUserProjects,
   toggleLikeProject,
+  deleteProject
 };

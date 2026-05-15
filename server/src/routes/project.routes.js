@@ -18,7 +18,8 @@ const {
     getUserProjects,
     getAllProjects,
     getSingleProject,
-    toggleLikeProject
+    toggleLikeProject,
+    deleteProject
 } = require("../controllers/project.controller");
 
 router.post(
@@ -42,6 +43,11 @@ router.put(
   "/like/:id",
   authMiddleware,
   toggleLikeProject
+);
+router.delete(
+  "/:id",
+  authMiddleware,
+  deleteProject
 );
 router.get("/", protect, getUserProjects);
 
