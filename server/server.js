@@ -20,7 +20,13 @@ const app = express();
 connectDB();
 
 // middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin:
+      "https://devhub-lemon.vercel.app/",
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // routes
