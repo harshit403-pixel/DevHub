@@ -23,7 +23,7 @@ connectDB();
 app.use(
   cors({
     origin:
-      "https://devhub-lemon.vercel.app/",
+      "https://devhub-lemon.vercel.app",
     credentials: true,
   })
 );
